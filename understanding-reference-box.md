@@ -21,7 +21,7 @@ We'll consider a simple circle shape around which we will wrap content. We'll us
 
 If unspecified, the default reference box for a shape is `margin-box`. The CSS shape rule above is equivalent to `shape-outside: circle(50%) margin-box;`.
 
-The `margin-box` reference box means that a shape is positioned in a virtual box defined by the outer edges of the host element's margin properties. The origin of the coordinate system is at the upper left corner of this box, with the X axis going from left to right and the Y axis going from top to bottom.
+The `margin-box` reference box means that a shape is positioned in a virtual box defined by the outer edges of the host element's margin. The origin of the coordinate system is at the upper left corner of this box, with the X axis going from left to right and the Y axis going from top to bottom.
 
 We didn't specify a margin in our sample yet, so the `margin-box` reference box does not extend beyond the element. It's still ok to imagine the origin of the coordinate system for the shape placed at the upper-left corner of the element.
 
@@ -51,7 +51,7 @@ We use the `margin-box` reference box when it's important to wrap content around
 
 ## The `padding-box`
 
-The `padding-box` reference box constrains the shape's coordinate system within the box defined by the outer edges of the element's padding properties.
+The `padding-box` reference box constrains the shape's coordinate system within the box defined by the outer edges of the element's padding.
 
 Let's use the `padding-box` reference box and specify a padding.
 
@@ -65,7 +65,7 @@ Let's use the `padding-box` reference box and specify a padding.
 }
 ```
 
-After setting `margin: 25px` the element grows by 25px in all directions. This effect occurs only if the element's `box-sizing` property value remains unchanged from the browser's default of `content-box`.
+After setting `padding: 25px` the element grows by 25px in all directions. This effect occurs only if the element's `box-sizing` property value remains unchanged from the browser's default of `content-box`.
 
 In this scenario, the reference box becomes 150px by 150px (width + 2 * 25px) by (height + 2 * 25px). The circle's 50% radius now means 75px, and the coordinate system origin is at the upper left corner of the box defined by the padding.
 
