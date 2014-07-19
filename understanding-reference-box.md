@@ -147,6 +147,28 @@ Imagine using `polygon()` to create a saw-like shape which runs down along the s
 
 [illustration of saw-like shape with more or less content]
 
+## Creating shapes from reference boxes
+
+It is possible to skip the shape function definition and to infer the shape from the element's reference box. This is particularly useful when `border-radius` is used, because that property can influence the shape of the reference box.
+
+```css
+.shape{
+  border-radius: 50px;
+  shape-outside: margin-box;
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+```
+
+The `border-radius` on its own does clip the element, but it does not affect the float area around it &mdash; that remains rectangular. Adding `shape-outside: margin-box;` (notice, no shape function), the float area around the element respects the shape from `border-radius`.
+
+To a great extent, all reference boxes work as previously defined in conjunction with border radii, but there are [special cases to consider](http://www.w3.org/TR/css-shapes/#shapes-from-box-values).
+
+Skipping shape functions and inferring shape from the reference box may come useful when the element is already clipped with `border-radius` and duplication of the shape isn't necessary.
+
+Creating shapes with `border-radius` sounds deceptively simple, maybe even trivial, but [Lea Verou](@LeaVerou) does an excellent job explaining the property's underlying expressive power in her talk, ["The Humble Border-Radius"](https://www.youtube.com/watch?v=JSaMl2OKjfQ).
+
 ## Quick reference
 
 The following table provides a quick reference on how to compute reference boxes.
