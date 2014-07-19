@@ -4,6 +4,8 @@ CSS Shapes are used to wrap content around custom paths. The paths are defined w
 
 A reference box defines the shape's coordinate system, so it influences how the shape will be drawn and positioned. There are four reference boxes to choose from: `margin-box`, `padding-box`, `border-box` and `content-box`. Each of them yields subtly different results. Read on to learn how they work.
 
+[illustration of boxes]
+
 We'll consider a simple circle shape around which we will wrap content. We'll use percentages for the circle radius to observe how reference boxes influence the resulting shape.
 
 ```css
@@ -51,7 +53,7 @@ We use the `margin-box` reference box when it's important to wrap content around
 
 ## The `padding-box`
 
-The `padding-box` reference box constrains the shape's coordinate system within the box defined by the outer edges of the element's padding.
+The `padding-box` reference box constrains the shape's coordinate system to the box defined by the outer edges of the element's padding.
 
 Let's use the `padding-box` reference box and specify a padding.
 
@@ -67,7 +69,7 @@ Let's use the `padding-box` reference box and specify a padding.
 
 After setting `padding: 25px` the element grows by 25px in all directions. This effect occurs only if the element's `box-sizing` property value remains unchanged from the browser's default of `content-box`.
 
-In this scenario, the reference box becomes 150px by 150px (width + 2 * 25px) by (height + 2 * 25px). The circle's 50% radius now means 75px, and the coordinate system origin is at the upper left corner of the box defined by the padding.
+In this scenario, the reference box becomes 150px by 150px, (width + 2 * 25px) by (height + 2 * 25px). The circle's 50% radius now means 75px, and the coordinate system origin is at the upper left corner of the box defined by the padding.
 
 [illustration of padding-box reference box]
 
@@ -75,8 +77,30 @@ However, if we use `box-sizing: border-box`, a different algorithm for computing
 
 [illustration of padding-box reference box + box-sizing: border-box]
 
-In both scenarios, the margin property can be used to adjust the position of the element together with its shape, which will be bound to the padding-box;
+In both scenarios, the margin property can be used to adjust the position of the element together with its shape.
 
 We use the `padding-box` reference box when it's necessary for the wrapped content to overlap part of the host element.
 
 [illustration of element with radial gradient which is overlapped by content]
+
+## The `border-box`
+
+As its name implies, the `border-box` reference box constrains the shape's coordinate system to the box defined by the outer edges of the element's border. In this case, the shape may overlap the element's border, but it can't extend beyond it.
+
+```css
+.shape{
+  border: 25px solid pink;
+  shape-outside: circle(50%) border-box;
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+```
+
+After applying a thick 25px solid border, which, by default, grows the element in all directions, the reference box will be 150px by 150px, (width + 2 * 25px) by (height + 2 * 25px), and the circle's 50% radius yields 75px.
+
+If we use `box-sizing: border-box`, this makes the browser subtract the necessary space for the border from the element's dimensions, thus reducing the surface for inner content. In that case, the reference-box ends up being 100px by 100px.
+
+Similar to `padding-box`, the `border-box` reference box helps keep the shape synchornized with the position of the element if margins are used.
+
+We use the `border-box` reference box when it's necessary for the shape to overlap the element's border and keep in sync with the border if it changes.
