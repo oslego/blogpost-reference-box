@@ -146,3 +146,14 @@ At first glance, it looks like the `content-box` reference box is too much of a 
 Imagine using `polygon()` to create a saw-like shape which runs down along the side of the element. CSS Shapes do not yet have a "repeat" property. Using progressive shape disclosure with the `content-box` reference box is a way to achieve the same effect using larger shapes composed of a repeated pattern.
 
 [illustration of saw-like shape with more or less content]
+
+## Quick reference
+
+The following table provides a quick reference on how to compute reference boxes.
+
+reference box | if default `box-sizing` | if `box-sizing: border-box`
+--- | --- | ---
+`content-box` | width + height                             | width + height
+`padding-box` | width + height + padding                   | width + height - padding
+`border-box`  | width + height + padding + border          | width + height - padding - border
+`margin-box`  | width + height + padding + border + margin | width + height - padding - border + margin
